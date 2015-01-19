@@ -1,0 +1,148 @@
+      
+   $(document).ready(function(){
+        var oTable = $('.informacion').dataTable();
+        var contenedor=$("#contenedorform");   
+        //contenedor.css({display:"none"});
+	$("#boxui").dialog({autoOpen:false});	
+        $( ".form" ).validate({
+                    submitHandler:function(){
+                     //capturo la url
+                      var $url=$("#url_save_registro").val();
+                     //armo mi funcion ajax y envio el form por ajax :)
+                      $.ajax({
+                      type:"POST",
+                      url:$url,
+                      data:$(".form").serialize(),
+                      success:function(j){
+                               var data= jQuery.parseJSON(j);
+                               $("#mensaje").html("<p>"+data.msj+"</p>");
+                               if(data.id){
+                                   show_message('#mensaje',400,200,'Exito','ok',null,'msj');
+                               }else{
+                                   show_message('#mensaje',400,200,'Error','ok',null,'msj');
+                               }
+                               //alert(data.msj);
+                               if(data.id){
+				 if(data.asi=="Ingresar"){
+                                                            var campo = data.tablatr;
+                                                            oTable.fnAddData(campo);
+                                                            contenedor.dialog("close"); 
+							 }
+                                if(data.asi=="Actualizar"){
+                                                            row_update(data);    
+                                                            contenedor.dialog("close"); 
+                                                          }													  
+                               }
+                           
+                     }
+                     });
+                    }
+                
+                });
+     
+   });
+    //---------------------------------------------------------------------------------------------------------------------------------
+   function row_update(data){
+       var oTable = $('.informacion').dataTable();
+       var cont=0;
+       var pos=parseInt(data.pos);
+       var btnEdit="";
+       var btnDel="";
+       
+        for(var i in data["campos"]){
+           oTable.fnUpdate(data["campos"][i] , pos, cont );
+           if(cont==0){
+            btnEdit='<img src="../../images/Actualizacion.png" width="30" height="30" onclick="Actualizar('+data['campos'][i]+','+pos+');" align="center" />';
+            btnDel='<img  src="../../images/delet.png" width="30" height="30" onclick="deleteRow('+data['campos'][i]+','+pos+');" align="center" />';
+           }
+           cont+=1;
+        }
+        if(data["mode"]){
+            btnEdit='<img src="../../images/Actualizacion.png" width="30" height="30" onclick="Actualizar('+data['mode']["codigo1"]+','+data['mode']["codigo2"]+','+pos+');" align="center" />';
+            btnDel='<img  src="../../images/delet.png" width="30" height="30" onclick="deleteRow('+data['mode']["codigo1"]+','+data['mode']["codigo2"]+','+pos+');" align="center" />';
+        }
+       
+       //actualizo el boton editar
+       oTable.fnUpdate(btnEdit , pos, cont );
+       //actualizo el boton eliminar
+       cont+=1;
+       oTable.fnUpdate(btnDel , pos, cont );
+
+   }
+   //---------------------------------------------------------------------------------------------------------------------------------
+  function show_message(contenedor,ancho,alto,titulo,btn1,btn2,tipo,data){
+   
+       if(tipo=='form'){
+       
+       $(contenedor).dialog({
+                                    autoOpen:true,
+                                    width:ancho,
+                                    heigth: alto,
+                                    title: titulo,
+                                    modal: true, //pone el resto de la venta oscura
+                                    buttons:[
+                                            {text:btn1,click:function(){ $(".form").submit();}},
+                                            {text:btn2,click:function(){$(this).dialog("close");}}
+                                            ]
+                                            
+                               });
+       }else if(tipo=='msj'){
+            $(contenedor).dialog({
+                                    autoOpen:true,
+                                    width:ancho,
+                                    heigth: alto,
+                                    title: titulo,
+                                    modal: true, //pone el resto de la venta oscura
+                                    buttons:[
+                                            {text:btn1, click:function(){$(this).dialog("close");}}
+                                            ]
+                                            
+                               });
+           
+       }else if(tipo=='verificar'){
+           
+           $(contenedor).dialog({
+                                    autoOpen:true,
+                                    width:ancho,
+                                    heigth: alto,
+                                    title: titulo,
+                                    modal: true, //pone el resto de la venta oscura
+                                    buttons:[
+                                             {text:btn1, click:function(){
+                                                      if(data.funcion=='delete'){delete_process(data);$(this).dialog("close");};
+                                                    }
+                                             },
+                                             {text:btn2, click:function(){$(this).dialog("close");}}
+                                            ]
+                                            
+                               });
+       }
+                                                                  
+      
+   }
+  //---------------------------------------------------------------------------------------------------------------------------------
+  function delete_process(data){
+                                var pos=data.posicion;
+                                var url=$("#urlDelete").val();
+                                $.ajax({
+                                    type:"POST",
+                                    url:url,
+                                    data:data,
+                                    success:function(j){
+                                     var data= jQuery.parseJSON(j);
+                                     $("#mensaje").html("<p>"+data.msj+"</p>");
+                                     show_message("#mensaje",400,200,'Eliminacion','ok',null,'msj',null);
+                                     if(data.id){
+                                         var oTable = $('.informacion').dataTable();
+                                            if(pos !== null) {
+                                                pos=parseInt(pos);
+                                                oTable.fnDeleteRow(pos);//delete row
+                                            }
+                                            
+                                     }
+
+                                   }
+
+
+                                 });
+                            }

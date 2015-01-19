@@ -1,0 +1,162 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*TABLA FORMULARIOS-------------------------------*/
+table.tabla_forms {
+	width: 100%;
+}
+
+table.tabla_forms tbody th {
+	color: #044178;
+	text-align: right;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-weight: bold;
+	vertical-align: middle;
+	padding-top: 5px;
+	padding-right: 25px;
+	padding-bottom: 5px;
+	padding-left: 8px;
+	background-image: url(../images/fondo_th.png);
+	background-repeat: repeat-y;
+	background-position: right center;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: #FFF;
+	background-color: #F4FDFF;
+}
+table.tabla_forms tbody  td {
+	color: #333;
+	background-color:#F4FDFF;
+	text-align: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	vertical-align: middle;
+	padding: 10px;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: #FFF;
+}
+input {
+	background-image: url(../images/fondo_campos.jpg);
+	background-position: left top;
+	background-repeat: repeat-x;
+	border: 1px solid #98B9CB;
+	background-color: #EFF8FF;
+	border-radius: 5px;
+	font-family: Tahoma, Geneva, sans-serif;
+	color: #487997;
+	padding-top: 8px;
+	padding-right: 8px;
+	padding-bottom: 8px;
+	padding-left: 25px;
+}
+textarea {
+	background-image: url(../images/fondo_campos.jpg);
+	background-position: left top;
+	background-repeat: repeat-x;
+	border: 1px solid #DCE7ED;
+	background-color: #F6FBFF;
+	font-family: Tahoma, Geneva, sans-serif;
+	color: #487997;
+	border-radius: 5px;
+	width: 500px;
+	padding: 25px;
+}
+input:focus, textarea:focus {
+	background-image: url(../images/fondo_campos_focus.jpg);
+	background-position: left top;
+	background-repeat: repeat-x;
+	border: 1px solid #88D2F7;
+	background-color: #FFF;
+}
+input.campo_error, textarea.campo_error {
+	background-image: url(../images/fondo_campos_error.jpg);
+	background-position: left top;
+	background-repeat: repeat-x;
+	border: 1px solid #FF7171;
+	background-color: #FFF;
+	padding-left: 25px;
+	color: #C00;
+}
+label {
+	font-family: Tahoma, Geneva, sans-serif;
+	color: #044178;
+	background-color: #F6FBFF;
+	padding: 7px;
+	border: 1px solid #DCE7ED;
+	margin: 10px;
+	clear: both;
+	border-radius: 5px;
+	font-size: 13px;
+}
+select {
+	padding:8px;
+	background-image: url(../images/fondo_campos.jpg);
+	background-position: left top;
+	background-repeat: repeat-x;
+	border: 1px solid #DCE7ED;
+	background-color: #EFF8FF;	
+	font-family: Tahoma, Geneva, sans-serif;
+	color: #487997;
+	border-radius: 5px;
+}
+
+option {
+	font-family: Tahoma, Geneva, sans-serif;
+	color: #044178;
+	background-color: #F6FBFF;
+	padding: 5px;
+	margin: 2px;
+	clear: both;
+	font-size: 12px;
+}
+.button {
+	background-image: url(../imagenes/fondo_btn.png);
+	padding-right: 10px;
+	height: 35px;
+	background-repeat: repeat-x;
+	color: #FFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	border-radius: 6px;
+	padding-left: 10px;
+	margin-right: 20px;
+	cursor:pointer;
+}
+#CONTE_FORM_LOGIN {
+	width: 450px;
+	height: 500px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 21px;
+}
+
+.campo_archivos {
+}
+
+.button:hover {
+	background-image: url(../images/fondo_btn_hover.png);
+	background-repeat: repeat-x;
+	color: #AEEFFF;
+}
+.mensaje_error {
+	background-color: #FFFBFB;
+	color: #F00;
+	width: 60%;
+	font-size: 11px;
+	font-family: Tahoma, Geneva, sans-serif;
+	border: 1px solid #FAD3D3;
+	padding: 6px;
+	margin: 6px;
+}
+.mensaje_ok {
+	background-color: #EAFFEA;
+	color: #096;
+	width: 60%;
+	font-size: 11px;
+	font-family: Tahoma, Geneva, sans-serif;
+	border: 1px solid #C8F0DF;
+	padding: 6px;
+	margin: 6px;
+}

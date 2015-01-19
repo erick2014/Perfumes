@@ -1,0 +1,18 @@
+<?php
+
+    // put your code here
+    /*Incluimos el fichero de la clase Db*/
+    require '../clases/Db.class.php';
+    /*Incluimos el fichero de la clase Conf*/
+    require '../../scripts/clases/Conf.class.php';
+    /*Creamos la instancia del objeto. Ya estamos conectados*/
+    $bd=Db::getInstance();
+	
+    $tabla = "`usuario`";
+	$campas = "`cedula`, `nombre`, `apellido`, `telefono`, `direccion`";
+    $variable = "'".$_POST['cedula']."','".$_POST['nombre']."','".$_POST['apellido']."','".$_POST['telefono']."','".$_POST['direccion']."'";
+	$stmt=$bd->insertar($tabla,$campas,$variable);	
+    $data=array('id'=>true,'tablatr'=>array($_POST['cedula'],$_POST['nombre'].' '.$_POST['apellido'],'<img src="../imagenes/Actualizacion.png" width="46" height="46" onclick="Actualizar('.$_POST['cedula'].');" align="center" />','<img id="eliminar" src="../imagenes/delet.png" width="46" height="46" onclick="eleminar('.$_POST['cedula'].');" align="center" />'),'msj'=>"el usuario guardado");
+    echo json_encode($data);
+	
+?>
